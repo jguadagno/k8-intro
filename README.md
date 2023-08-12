@@ -2,24 +2,28 @@
 
 This repository is being used for several presentations, including the [A Lap Around Microsoft Azure](https://www.josephguadagno.net/presentations/a-lap-around-microsoft-azure) talk.  
 
-## Setup
+## Software Tools
 
-We'll include any setup required to get going with this project
-
-### Software Tools
+You'll need to have at least on of the following Integrated Development Environments (IDEs) installed:
 
 * [Visual Studio](https://visualstudio.microsoft.com/) [Code](https://code.visualstudio.com/?wt.mc_id=DX_841432) ([Mac](https://code.visualstudio.com/docs/?dv=osx) / [Windows](https://code.visualstudio.com/?wt.mc_id=DX_841432#))
 * [Visual Studio](https://visualstudio.microsoft.com/) Community ([Windows](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=16))
 * [JetBrains](https://www.jetbrains.com/) [Rider](https://www.jetbrains.com/rider/) ([Mac](https://www.jetbrains.com/rider/download/download-thanks.html/) / [Windows](https://www.jetbrains.com/rider/download/download-thanks.html))
 
-### Databases
+## Databases
 
-#### Microsoft SQL Server
+Current the application supports two databases:
 
-[Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) for local development. See the file [sqlserver\readme.md](./sqlserver/readme.md) for steps to set up the database.
+* [Microsoft SQL Server](#microsoft-sql-server)
+* [SQLite](#sqlite)
+
+### Microsoft SQL Server
+
+To use Microsoft SQL Server, you will need to install [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) for local development. 
+See the file [sqlserver\readme.md](./sqlserver/readme.md) for steps to set up the database.
 
 To configure the application to use Microsoft SQL Server,
-update the `ConnectionStrings` `ContactsDatabaseSqlServer` setting in your *appsettings.json* file(s) with the connection string to your instance of Microsoft SQL Server.
+update the `ConnectionStrings` `ContactsDatabaseSqlServer` setting in the *Contacts.Api* project's *appsettings.json* file(s) with the connection string to your instance of Microsoft SQL Server.
 
 The connection string is in the format of `Server=<server>;Database=<database>;User Id=<user>;Password=<password>;`.
 
@@ -33,6 +37,8 @@ Example:
 }
 ```
 
+***NOTE:*** You may need to add the `encrypt=false` to the connection string if you are using a local instance of Microsoft SQL Server.
+
 The `appsettings.json` file(s) are located in the *./src/Contacts.Api* folder.
 
 Files:
@@ -40,7 +46,7 @@ Files:
 * [appsettings.Development.json](./src/Contacts.Api/appsettings.Development.json)
 * [appsettings.json](./src/Contacts.Api/appsettings.json)
 
-In the [Program.cs](./src/Contacts.Api/Program.cs) file, you will need to uncomment the following line:
+In the [Program.cs](./src/Contacts.Api/Program.cs) file of the *./src/Contacts.Api* project, you will need to uncomment the following line:
 
 ```csharp
 builder.Services.AddTransient<IContactDataStore, SqlServerDataStore>();
@@ -52,12 +58,12 @@ and comment the following line:
 builder.Services.AddTransient<IContactDataStore, SqliteDataStore>();
 ```
 
-#### SQLite
+### SQLite
 
-[SQLite](https://www.sqlite.org/index.html) for local development. See the file [sqlite\readme.md](./sqlite/readme.md) for steps to set up the database.
+To use SQLite, you will need to install [SQLite](https://www.sqlite.org/index.html) for local development. See the file [sqlite\readme.md](./sqlite/readme.md) for steps to set up the database.
 
 To configure the application to use Microsoft SQL Server,
-update the `ConnectionStrings` `ContactsDatabaseSqlite` setting in your *appsettings.json* file(s) with the connection string to your instance of Microsoft SQL Server.
+update the `ConnectionStrings` `ContactsDatabaseSqlServer` setting in the *Contacts.Api* project's *appsettings.json* file(s) with the connection string to your instance of Microsoft SQL Server.
 
 The connection string is in the format of `Data Source=C:\databases\contacts.db;`.
 
@@ -78,8 +84,7 @@ Files:
 * [appsettings.Development.json](./src/Contacts.Api/appsettings.Development.json)
 * [appsettings.json](./src/Contacts.Api/appsettings.json)
 
-In the [Program.cs](./src/Contacts.Api/Program.cs) file, you will need to uncomment the following line:
-
+In the [Program.cs](./src/Contacts.Api/Program.cs) file of the *./src/Contacts.Api* project, you will need to uncomment the following line:
 
 ```csharp
 builder.Services.AddTransient<IContactDataStore, SqliteDataStore>();
@@ -90,3 +95,10 @@ and comment the following line:
 ```csharp
 builder.Services.AddTransient<IContactDataStore, SqlServerDataStore>();
 ```
+## Web Application
+
+You may need to update the `ApiRootUri` setting in the *Contacts.Web* project's [appsettings.Development.json](./src/Contacts.WebUi/appsettings.Development.json) and/or [appsettings.json](./src/Contacts.WebUi/appsettings.json) file(s) with the URL to your instance of the *Contacts.Api* project.
+
+If you're running locally, with no changes to the Api project startup options, 
+the setting should be "https://localhost:5901/" (don't forget the trailing slash).  
+Otherwise, set the URL and port to whatever you configured.
