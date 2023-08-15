@@ -1,0 +1,19 @@
+﻿version: "3.7"
+
+services:
+  contacts-api:
+    image: contacts.api
+    build:
+      context: .
+      dockerfile: Contacts.Api/Dockerfile
+    ports:
+      - "32774:443"
+  contacts-webui:
+    depends_on: 
+      - contacts-api
+    image: contacts.webui
+    build:
+      context: .
+      dockerfile: Contacts.WebUi/Dockerfile
+    ports:
+      - "32776:443"
