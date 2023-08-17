@@ -6,6 +6,7 @@
         <WebProject_DirectoryAccessLevelKey>0</WebProject_DirectoryAccessLevelKey>
         <LangVersion>default</LangVersion>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
     </PropertyGroup>
 
     <ItemGroup>

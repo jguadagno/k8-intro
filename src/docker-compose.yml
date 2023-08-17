@@ -1,19 +1,16 @@
-﻿version: "3.7"
+version: '3.4'
 
 services:
-  contacts-api:
-    image: contacts.api
+  contactsapi:
+    image: ${DOCKER_REGISTRY-}contactsapi
     build:
       context: .
       dockerfile: Contacts.Api/Dockerfile
-    ports:
-      - "32774:443"
-  contacts-webui:
-    depends_on: 
-      - contacts-api
-    image: contacts.webui
+
+  contactswebui:
+    image: ${DOCKER_REGISTRY-}contactswebui
     build:
       context: .
       dockerfile: Contacts.WebUi/Dockerfile
-    ports:
-      - "32776:443"
+    environment:
+      Settings__ApiRootUri: "https://localhost:60722/Contacts/"

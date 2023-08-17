@@ -7,17 +7,17 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["Contacts.WebUi/Contacts.WebUi.csproj", "Contacts.WebUi/"]
+COPY ["Contacts.WebUi/ContactsWebUi.csproj", "Contacts.WebUi/"]
 COPY ["Contacts.Domain/Contacts.Domain.csproj", "Contacts.Domain/"]
-RUN dotnet restore "Contacts.WebUi/Contacts.WebUi.csproj"
+RUN dotnet restore "Contacts.WebUi/ContactsWebUi.csproj"
 COPY . .
 WORKDIR "/src/Contacts.WebUi"
-RUN dotnet build "Contacts.WebUi.csproj" -c Release -o /app/build
+RUN dotnet build "ContactsWebUi.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Contacts.WebUi.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "ContactsWebUi.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Contacts.WebUi.dll"]
+ENTRYPOINT ["dotnet", "ContactsWebUi.dll"]
