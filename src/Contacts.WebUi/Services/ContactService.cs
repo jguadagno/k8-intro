@@ -28,7 +28,7 @@ public class ContactService: IContactService
 
     public async Task<List<Domain.Models.Contact>> GetContactsAsync()
     {
-        var url = $"{_settings.ApiRootUri}contacts";
+        var url = $"{_settings.ApiRootUri}contacts/";
         return await ExecuteGetAsync<List<Domain.Models.Contact>>(url);
     }
 

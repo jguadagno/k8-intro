@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+    name: contactsapi-pod
+    labels:
+        project: k8-intro
+spec:
+    containers:
+        - name: contactsapi
+          image: rjdudley/contactsapi:3.0
+          ports:
+            - containerPort: 443
+            
