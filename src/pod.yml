@@ -7,6 +7,7 @@ metadata:
 spec:
     containers:
         - name: contactsapi
-          image: rjdudley/contactsapi:1.0
+          image: rjdudley/contactsapi:3.0
           ports:
             - containerPort: 443
+            

@@ -1,0 +1,130 @@
+The story so far
+
+Contacts app, works fine as API + UI using kestrel on Windows
+Can run each individually in Docker
+But, in Docker, UI can't call API using HTTPS
+
+Joe was pretty sure certs were the issue
+There are known challenges to developer certs when running local containers
+The containers running on Linux, not Windows
+
+Removed the SSL configuration
+UI still couldn't reach the API
+
+Need to use loopback URL with host port
+http://host.docker.internal:{host port mapped to 80}
+
+I did put the SSL back in, and threw several clear certificate errors
+Also still an HTTPS policy warning when running the container
+This confirms Joe's suspicion
+Using local certs is an adventure for another day
+
+Now, time to try the stack in kubernetes
+
+Switched to local Kubernetes deployment to try to get the API running
+can run demo app from book so setup is probably working
+API call isn't working
+
+---
+
+docker desktop running
+
+> minikube start
+> minikube dashboard
+
+---
+
+check and see what's running (nothing up my sleeve)
+
+> kubectl get nodes
+> kubectl get pod
+> kubectl get svc
+
+if necessary, delete stuff
+
+> kubectl delete svc {service name}
+> kubectl delete pod {pod name}
+
+---
+
+List any containers
+
+> docker container ls
+
+(easier to clean up in desktop UI)
+
+---
+
+Build image w/ docker file
+Be in the src folder
+
+> docker image build -f Contacts.Api\Dockerfile -t rjdudley/contactsapi:1.0 .
+
+(don't forget . at the end)
+
+---
+
+deploy to dockerhub
+
+> docker image push rjdudley/contactsapi:1.0
+
+(explain the layers)
+
+confirm at https://hub.docker.com/
+
+--- 
+
+build pod
+
+> kubectl apply -f pod.yml
+> kubectl describe pod contactsapi-pod
+
+---
+
+build service
+
+> kubectl apply -f svc-local.yml 
+> kubectl get svc
+
+
+Should be able to hit localhost:32767 and it works, but doesn'terminal
+check dashboard
+
+---
+
+reverse proxy, have to keep terminal window open
+
+> minikube service {service name} --url
+
+What is happening???  Check logs for the pod
+
+> kubectl logs contactsapi-pod
+
+(shows sqlite error, table not known)
+SQLite will usually create a database if one doesn't exist, so may not have been copied
+Created database is temporary unless you do some DDL
+
+terminal to the pod
+
+> kubectl exec --stdin --tty contactsapi-pod -- /bin/bash
+
+
+
+
+========================================
+
+Confirm minikube with demo from book
+
+using qsk-book folder
+switch to app
+
+> docker image build -t rjdudley/qsk-book:1.0 .
+
+> docker image push rjdudley/qsk-book:1.0
+
+build pod and service
+
+need to use loopback URL but should work
+
+
+

@@ -5,9 +5,9 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - port: 443
+  - port: 80
     protocol: TCP
-    targetPort: 443
+    targetPort: 80
     nodePort: 32767
   selector:
     project: k8-intro
