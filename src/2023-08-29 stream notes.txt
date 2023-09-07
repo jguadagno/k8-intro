@@ -96,6 +96,8 @@ reverse proxy, have to keep terminal window open
 
 > minikube service {service name} --url
 
+http://{ip:port}/contacts/
+
 What is happening???  Check logs for the pod
 
 > kubectl logs contactsapi-pod
@@ -109,7 +111,7 @@ terminal to the pod
 > kubectl exec --stdin --tty contactsapi-pod -- /bin/bash
 
 
-
+The problem was we didn't set the env for dev so was using the prod appsettings
 
 ========================================
 
@@ -127,4 +129,7 @@ build pod and service
 need to use loopback URL but should work
 
 
+========
 
+
+The Development environment shouldn't be enabled for deployed applications. It can result in displaying sensitive information from exceptions to end users. For local debugging, enable the Development environment by setting the ASPNETCORE_ENVIRONMENT environment variable to Development and restarting the app. 
