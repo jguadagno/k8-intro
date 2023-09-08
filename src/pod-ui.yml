@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Pod
 metadata:
-    name: contactsapi-pod
+    name: contactsui-pod
     labels:
-        project: k8-intro
+        project: k8-intro-ui
 spec:
     containers:
-        - name: contactsapi
-          image: rjdudley/contactsapi:6.0
+        - name: contactswebui
+          image: rjdudley/contactswebui:2.0
           ports:
             - containerPort: 80
             

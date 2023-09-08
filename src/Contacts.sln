@@ -42,7 +42,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sqlite", "Sqlite", "{A887E7
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{484585AE-B049-4263-9207-976AA66F04E1}"
 	ProjectSection(SolutionItems) = preProject
+		pod-ui.yml = pod-ui.yml
 		pod.yml = pod.yml
+		svc-local-ui.yml = svc-local-ui.yml
 		svc-local.yml = svc-local.yml
 	EndProjectSection
 EndProject
