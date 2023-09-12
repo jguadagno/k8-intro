@@ -1,0 +1,38 @@
+Kubernetes in AWS
+* totally self-managed on EC2
+* partially to fully AWS managed on EKS
+
+EKS
+* fully managed control plane
+
+* Deployment in 
+	- AWS cloud, fully managed
+	- Outposts, partially on-prem partially managed
+	- EKS Anywhere, on-prem self-managed
+	- EKS Distro, on-prem or wherever, self-managed
+	- https://docs.aws.amazon.com/eks/latest/userguide/eks-deployment-options.html
+	
+* Compute
+	- AWS Fargate, fully managed
+	- Karpenter, self-managed
+	- Managed EC2 node groups, fully managed
+	- EC2, self managed
+	
+* manage with
+	- kubectl
+	- eksctl
+	- AWS CLI
+	- AWS CDK
+	- AWS Console
+	- Terraform, Pulumi
+	
+* Setup is not linear, there are side quests
+	- IAM role, copy-paste from docs, has its own side quest
+		- trust policy, copy-paste from docs
+	- private subnet
+		- default is public
+		- you have to remove the option for traffic from 0.0.0.0
+	- the setup user matters, there is a little reconfiguration if you want to add another
+		- https://repost.aws/knowledge-center/eks-api-server-unauthorized-error
+		- not the usual IAM setup, done on the command line
+	
