@@ -45,8 +45,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		contacts-k8s.yml = contacts-k8s.yml
 	EndProjectSection
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{4C3FFC3F-8F71-4DF6-AAB9-CD1629ABC2CD}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -85,10 +83,6 @@ Global
 		{1CECA503-7BB6-4ED3-8E93-63775C8BCE2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CECA503-7BB6-4ED3-8E93-63775C8BCE2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CECA503-7BB6-4ED3-8E93-63775C8BCE2F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4C3FFC3F-8F71-4DF6-AAB9-CD1629ABC2CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4C3FFC3F-8F71-4DF6-AAB9-CD1629ABC2CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4C3FFC3F-8F71-4DF6-AAB9-CD1629ABC2CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4C3FFC3F-8F71-4DF6-AAB9-CD1629ABC2CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
